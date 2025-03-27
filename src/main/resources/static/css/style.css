@@ -1,0 +1,113 @@
+html {
+	font-size: 20px;
+}
+
+body {
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	padding-bottom: 70px; /*フッターの高さ分の余白を確保*/
+	width: 100%;
+}
+
+h1 {
+	font-size: 2rem;
+}
+
+a {
+	color: black;
+	text-decoration: none !important;
+}
+
+a:hover {
+	color: chartreuse;
+}
+
+.img-small {
+    width: 150px; /* 幅を150pxに制限 */
+    height: auto; /* 高さはアスペクト比を維持 */
+}
+
+
+.container {
+    display: flex;
+    justify-content: space-evenly; /* アイコンを均等配置 */
+    align-items: center;
+    width: 100%;
+    gap: 20px; /* アイコン間の間隔を追加 */
+}
+
+.center-container {
+	display: flex;
+    justify-content: center;  /* 水平方向に中央 */
+    top: 0;
+}
+
+.wrapper {
+	background-color: cadetblue;
+}
+
+footer {
+	width: 100%;
+	height: 60px;
+	position: fixed;
+	bottom: 0;
+	padding: 10px;
+	background-color: cadetblue;
+	text-align: center;
+	align-items: center;
+}
+
+.nav-item {
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.8rem; /* ラベルのサイズ調整 */
+    color: white;
+    margin: 0 15px;
+}
+
+.nav-item i {
+    font-size: 1.8rem; /* アイコンサイズを大きく */
+    margin-bottom: 3px;
+}
+
+.btn {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: black;
+    font-size: 0.8rem; /* 文字のサイズ調整 */
+}
+
+.btn i {
+    font-size: 1.7rem; /* アイコンのサイズを調整 */
+    margin-bottom: 3px;
+}
+
+.btn:hover {
+    color: black;
+}
+
+.custom-img {
+    max-width: 50%; /* 画像の幅を50%に縮小 */
+    height: auto;   /* アスペクト比を維持 */
+    width: 250px;
+    height: auto;
+    padding-left: 10%;
+    border-radius: 50%;
+}
+
+.link-danger {
+  color: #f2594b;
+}
+
+.work-btn-danger {
+  background-color: black !important;
+  transition: 0.1s;
+}
+
+
+
+
+
+
+
+

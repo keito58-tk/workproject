@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<div th:replace="~{fragment :: meta}"></div>
+		
+		<div th:replace="~{fragment :: styles}"></div>
+		
+		<title>マニュアル詳細</title>
+	</head>
+	<body>
+		<div th:replace="~{fragment :: header}"></div>
+		
+		<main>
+			<div class="container pt-4 pb-5">
+               <div class="row justify-content-center">
+                   <div class="col-xl-5 col-lg-6 col-md-8">
+					   <h1>マニュアル詳細</h1>
+	                       
+	                   <h1 class="mb-4 text-center" th:text="${manual.name}"></h1>
+	
+					   <a th:href="@{/manual}">&lt;戻る</a>
+					   
+	                   <div class="d-flex justify-content-end align-items-end mb-3">
+	                       <div>
+	                           <a th:href="@{/manual/__${manual.id}__/edit}">編集</a>
+	                       </div>
+	                   </div>
+	
+	                   <div class="mb-3">
+	                       <img th:if="${manual.imageName}" th:src="@{/images/__${manual.imageName}__}" class="w-100 img-small" alt="マニュアル画像">
+	                       <img th:unless="${manual.imageName}" th:src="@{/images/no_image.jpg}" class="w-100 img-small" alt="NO IMAGE">
+	                   </div>
+	
+	                   <div class="container mb-4">
+	                       <div class="pb-2 mb-2 border-bottom">
+	                           <div class="col">
+	                               <span class="fw-bold">ID</span>
+	                           </div>
+	
+	                           <div class="col">
+	                               <span th:text="${manual.id}"></span>
+	                           </div>
+	                       </div>
+	
+	                       <div class="pb-2 mb-2 border-bottom">
+	                           <div class="col">
+	                               <span class="fw-bold">マニュアル名</span>
+	                           </div>
+	
+	                           <div class="col">
+	                               <span th:text="${manual.name}"></span>
+	                           </div>
+	                       </div>
+	                   </div>
+                   </div>
+			   </div>
+		   </div>
+			
+		</main>
+		
+		<!--フッター-->
+		<div th:replace="~{fragment :: footer}"></div>
+		
+		<div th:replace="~{fragment :: scripts}"></div>
+	</body>
+</html>

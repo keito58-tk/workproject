@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<div th:replace="~{fragment :: meta}"></div>
+		
+		<div th:replace="~{fragment :: styles}"></div>
+		
+		<title>業務改善に挑戦してみた！</title>
+	</head>
+	<body>
+		<div th:replace="~{fragment :: header}"></div>
+		
+		<main>
+			<div class="container">
+				<div class="row justify-content-center">
+					<h1>トップページ</h1>
+									
+					<div th:if="${param.loggedIn}" class="alert alert-info">
+						ログインしました
+					</div>
+					
+					<div th:if="${param.loggedOut}" class="alert alert-info">
+						ログアウトしました
+					</div>
+					
+					<div th:if="${successMessage}" class="alert alert-info">
+						<span th:text="${successMessage}"></span>
+					</div>
+					
+					<div>
+						<div>製品</div>
+													
+						<div>マニュアル</div>
+						
+						<div>まとめ</div>
+					</div>
+				</div>
+			</div>
+			
+		</main>
+		
+		<!--フッター-->
+		<div th:replace="~{fragment :: footer}"></div>
+		
+		<div th:replace="~{fragment :: scripts}"></div>
+	</body>
+</html>

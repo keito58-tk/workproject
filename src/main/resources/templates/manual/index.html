@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<div th:replace="~{fragment :: meta}"></div>
+		
+		<div th:replace="~{fragment :: styles}"></div>
+		
+		<title>マニュアル一覧</title>
+	</head>
+	<body>
+		<div th:replace="~{fragment :: header}"></div>
+		
+		<main>
+			<div class="container">
+				<div class="row justify-content-center">
+						<h1>マニュアル一覧</h1>
+									
+						<div class="center-container justify-content-between align-items-end flex-wrap">
+							<form method="get" th:action="@{/manual}" class="mb-3">
+								<div class="input-group">
+									<input type="text" class="form-control" name="keyword" th:value="${keyword}" placeholder="マニュアル名">
+									<button type="submit" class="btn test-white shadow-sm">検索</button>
+								</div>
+							</form>
+							<a th:href="@{manual/register}" class="btn shadow-sm mb-3">登録</a>
+						</div>
+						
+						<div th:if="${successMessage}" class="alert alert-info">
+							<span th:text="${successMessage}"></span>
+						</div>
+						
+						<div th:if="${errorMessage}" class="alert alert-danger">
+			                <span th:text="${errorMessage}"></span>
+			            </div> 
+						
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">ID</th>
+									<th scope="col">マニュアル名</th>
+									<th scope="col"></th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
+							
+							<tbody>
+								<tr th:each="manual : ${manualPage}">
+									<td th:text="${manual.id}"></td>
+									<td th:text="${manual.name}"></td>
+									<td><a th:href="@{/manual/__${manual.id}__}">詳細</a></td>
+									<td><a href="#"  data-bs-toggle="modal" th:data-bs-target="${'#deleteManualModal' + manual.id}">削除</a></td>
+									
+								</tr>
+								
+							</tbody>
+						</table>
+						
+						<div th:each="manual : ${manualPage}">
+							<!-- 削除用モーダル -->
+                           <div class="modal fade" th:id="${'deleteManualModal' + manual.id}" tabindex="-1" th:aria-labelledby="${'deleteManualModalLabel' + manual.id}">
+                               <div class="modal-dialog">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <h5 class="modal-title" th:id="${'deleteManualModalLabel' + manual.id}" th:text="${manual.name + 'を削除してもよろしいですか？'}"></h5>
+                                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+                                       </div>
+                                       <div class="modal-footer">
+                                           <form method="post"th:action="@{/manual/__${manual.id}__/delete}">
+                                               <button type="submit" class="btn work-btn-danger text-white shadow-sm">削除</button>
+                                           </form>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+						</div>
+						
+						<!-- ページネーション -->
+						<div th:if="${manualPage.getTotalPages() > 1}" class="d-flex justify-content-center">
+							<nav aria-label="マニュアル一覧ページ">
+								<ul class="pagination">
+									<li class="page-item">
+										<span th:if="${manualPage.isFirst()}" class="page-link disabled">前</span>
+										<a th:unless="${manualPage.isFirst()}" th:href="@{manual(page = ${manualPage.getNumber() - 1}, keyword = ${keyword})}" class="page-link">前</a>
+									</li>
+									<li th:each="i : ${#numbers.sequence(0, manualPage.getTotalPages() - 1)}" class="page-item">
+										<span th:if="${i == manualPage.getNumber()}" class="page-link active" th:text="${i + 1}"></span>
+										<a th:unless="${i == manualPage.getNumber()}" th:href="@{/manual(page = ${i}, keyword = ${keyword})}" class="page-link th:text=${i + 1}"></a>
+									</li>
+									<li class="page-item">
+										<span th:if="${manualPage.isLast()}" class="page-link disabled">次</span>
+										<a th:unless="${manualPage.isLast()}" th:href="@{manual(page = ${manualPage.getNumber() + 1}, keyword = ${keyword})}" class="page-link">次</a>
+									</li>
+									
+								</ul>
+							</nav>
+						</div>
+				</div>
+			</div>		   
+		</main>
+		
+		<!--フッター-->
+		<div th:replace="~{fragment :: footer}"></div>
+		
+		<div th:replace="~{fragment :: scripts}"></div>
+	</body>
+</html>
