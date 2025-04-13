@@ -95,7 +95,7 @@
 									</li>
 									<li th:each="i : ${#numbers.sequence(0, summarizePage.getTotalPages() - 1)}" class="page-item">
 										<span th:if="${i == summarizePage.getNumber()}" class="page-link active" th:text="${i + 1}"></span>
-										<a th:unless="${i == summarizePage.getNumber()}" th:href="@{/summarize(page = ${i}, keyword = ${keyword})}" class="page-link th:text=${i + 1}"></a>
+										<a th:unless="${i == summarizePage.getNumber()}" th:href="@{/summarize(page = ${i}, keyword = ${keyword})}" class="page-link" th:text="${i + 1}"></a>
 									</li>
 									<li class="page-item">
 										<span th:if="${summarizePage.isLast()}" class="page-link disabled">次</span>
