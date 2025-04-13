@@ -48,8 +48,16 @@
 								<tr th:each="summarize : ${summarizePage}">
 									<td th:text="${summarize.id}"></td>
 									<td th:text="${summarize.name}"></td>
-									<td></td>
-									<td></td>
+									<td>
+										<ul>
+											<li th:each="product : ${summarize.product}" th:text="${product.name}"></li>
+										</ul>
+									</td>
+									<td>
+										<ul>
+											<li th:each="manual : ${summarize.manual}" th:text="${manual.name}"></li>
+										</ul>
+									</td>
 									<td><a th:href="@{/summarize/__${summarize.id}__}">詳細</a></td>
 									<td><a href="#"  data-bs-toggle="modal" th:data-bs-target="${'#deleteSummarizeModal' + summarize.id}">削除</a></td>
 									
@@ -68,7 +76,7 @@
                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
                                        </div>
                                        <div class="modal-footer">
-                                           <form method="post"th:action="@{/summarize/__${summarize.id}__/delete}">
+                                           <form method="post" th:action="@{/summarize/__${summarize.id}__/delete}">
                                                <button type="submit" class="btn work-btn-danger text-white shadow-sm">削除</button>
                                            </form>
                                        </div>

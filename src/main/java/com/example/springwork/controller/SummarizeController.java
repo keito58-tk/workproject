@@ -119,7 +119,7 @@ public class SummarizeController {
 		}
 		
 		Summarize summarize = optionalSummarize.get();
-		SummarizeEditForm summarizeEditForm = new SummarizeEditForm(summarize.getName(), null);
+		SummarizeEditForm summarizeEditForm = new SummarizeEditForm(summarize.getName(), null, null, null);
 		
 		model.addAttribute("summarize", summarize);
 		model.addAttribute("summarizeEditForm", summarizeEditForm);

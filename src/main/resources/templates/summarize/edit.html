@@ -42,7 +42,27 @@
                                   <input type="file" class="form-control" th:field="*{imageFile}">
                               </div>
                           </div>
-   
+						  
+						   <div class="form-group row mb-3">
+                              <div class="col-md-4">
+                                  <label for="productImageFile" class="col-form-label text-md-left fw-bold">製品画像</label>
+                              </div>
+                              <div class="col-md-8">
+                                  <div th:if="${#fields.hasErrors('productImageFile')}" class="text-danger small mb-2 w-100 img-small" th:errors="*{productImageFile}"></div>
+                                  <input type="file" class="form-control" th:field="*{productImageFile}">
+                              </div>
+                          </div>
+						  
+						   <div class="form-group row mb-3">
+                              <div class="col-md-4">
+                                  <label for="manualImageFile" class="col-form-label text-md-left fw-bold">マニュアル画像</label>
+                              </div>
+                              <div class="col-md-8">
+                                  <div th:if="${#fields.hasErrors('manualImageFile')}" class="text-danger small mb-2 w-100 img-small" th:errors="*{manualImageFile}"></div>
+                                  <input type="file" class="form-control" th:field="*{manualImageFile}">
+                              </div>
+                          </div>
+						 
 	                       <div class="d-flex justify-content-center my-4">
 	                           <button type="submit" class="btn shadow-sm w-50">更新</button>
 	                       </div>

@@ -11,4 +11,8 @@ public class SummarizeRegisterForm {
 	private String name;
 	
 	private MultipartFile imageFile;
+	
+	private MultipartFile productImageFile;
+    
+    private MultipartFile manualImageFile;
 }
