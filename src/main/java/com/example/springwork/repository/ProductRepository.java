@@ -12,4 +12,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 	public List<Product> findByNameOrderByCreatedAtDesc(String name);
 	
 	public Page<Product> findByNameLike(String keyword, Pageable pageable);
+	
 }

@@ -110,4 +110,10 @@ public class ProductService {
             e.printStackTrace();
         }
     }
+    
+    // 製品情報の保存処理
+    @Transactional
+    public void save(Product product) {
+    	productRepository.save(product);
+    }
 }

@@ -21,15 +21,23 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.springwork.entity.Summarize;
 import com.example.springwork.form.SummarizeEditForm;
 import com.example.springwork.form.SummarizeRegisterForm;
+import com.example.springwork.service.ManualService;
+import com.example.springwork.service.ProductService;
 import com.example.springwork.service.SummarizeService;
 
 @Controller
 @RequestMapping("/summarize")
 public class SummarizeController {
 	private final SummarizeService summarizeService;
+	private final ProductService productService;
+	private final ManualService manualService;
 	
-	public SummarizeController(SummarizeService summarizeService) {
+	public SummarizeController(SummarizeService summarizeService, 
+							   ProductService productService,
+							   ManualService manualService) {
 		this.summarizeService = summarizeService;
+		this.productService = productService;
+		this.manualService = manualService;
 	}
 	
 	// 一覧ページの表示
@@ -80,7 +88,8 @@ public class SummarizeController {
 	@GetMapping("/register")
 	public String register(Model model) {
 		model.addAttribute("summarizeRegisterForm", new SummarizeRegisterForm());
-		
+		model.addAttribute("productList", productService.findAllProducts(Pageable.unpaged()));
+		model.addAttribute("manualList", manualService.findAllManuals(Pageable.unpaged()));
 		return "summarize/register";
 	}
 	
@@ -93,8 +102,10 @@ public class SummarizeController {
 	{
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("summarizeRegisterForm",summarizeRegisterForm);
-			
-			return "/summarize/register";
+			// エラー時にもリストを再設定する
+			model.addAttribute("productList", productService.findAllProducts(Pageable.unpaged()));
+			model.addAttribute("manualList", manualService.findAllManuals(Pageable.unpaged()));
+			return "summarize/register";
 		}
 		
 		summarizeService.createSummarize(summarizeRegisterForm);
@@ -119,7 +130,7 @@ public class SummarizeController {
 		}
 		
 		Summarize summarize = optionalSummarize.get();
-		SummarizeEditForm summarizeEditForm = new SummarizeEditForm(summarize.getName(), null);
+		SummarizeEditForm summarizeEditForm = new SummarizeEditForm(summarize.getName(), null, null, null);
 		
 		model.addAttribute("summarize", summarize);
 		model.addAttribute("summarizeEditForm", summarizeEditForm);
@@ -139,7 +150,7 @@ public class SummarizeController {
 		if (optionalSummarize.isEmpty()) {
 			redirectAttributes.addFlashAttribute("errorMessage", "まとめが存在しません。");
 			
-			return "redirect;/summarize";
+			return "redirect:/summarize";
 		}
 		
 		Summarize summarize = optionalSummarize.get();
@@ -157,6 +168,7 @@ public class SummarizeController {
 		return "redirect:/summarize";
 	}
 	
+	// 削除処理
 	@PostMapping("/{id}/delete")
 	public String delete(@PathVariable(name = "id") Integer id,
 						 RedirectAttributes redirectAttributes

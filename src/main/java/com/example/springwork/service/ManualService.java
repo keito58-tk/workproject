@@ -110,4 +110,10 @@ public class ManualService {
             e.printStackTrace();
         }
     }
+    
+    // マニュアル情報の保存処理
+    @Transactional
+    public void save(Manual manual) {
+    	manualRepository.save(manual);
+	}
 }

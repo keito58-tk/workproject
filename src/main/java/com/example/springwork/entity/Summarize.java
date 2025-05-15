@@ -25,11 +25,11 @@ public class Summarize {
 	private String name;
 	
 	@ManyToOne
-	@JoinColumn(name = "product_id", nullable = false)
+	@JoinColumn(name = "product_id")
 	private Product product;
 	
 	@ManyToOne
-	@JoinColumn(name = "manual_id", nullable = false)
+	@JoinColumn(name = "manual_id")
 	private Manual manual;
 	
 	@Column(name = "created_at", insertable = false, updatable = false)

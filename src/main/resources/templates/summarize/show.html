@@ -46,6 +46,27 @@
 	                               <span th:text="${summarize.name}"></span>
 	                           </div>
 	                       </div>
+						   
+	                       <div class="pb-2 mb-2 border-bottom">
+	                           <div class="col">
+	                               <span class="fw-bold">製品名</span>
+	                           </div>
+	
+	                           <div class="col">
+	                               <span th:each="product : ${summarize.product}" th:text="${product.name}"></span>
+	                           </div>
+	                       </div>
+						   
+	                       <div class="pb-2 mb-2 border-bottom">
+	                           <div class="col">
+	                               <span class="fw-bold">マニュアル名</span>
+	                           </div>
+	
+	                           <div class="col">
+	                               <span th:each="manual : ${summarize.manual}" th:text="${manual.name}"></span>
+	                           </div>
+	                       </div>
+						
 	                   </div>
                    </div>
 			   </div>
