@@ -1,15 +1,14 @@
 package com.example.springwork.entity;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -25,11 +24,13 @@ public class Summarize {
 	@Column(name = "name")
 	private String name;
 	
-	@OneToMany(mappedBy = "summarize", fetch = FetchType.EAGER)
-	private List<Product> product;
+	@ManyToOne
+	@JoinColumn(name = "product_id")
+	private Product product;
 	
-	@OneToMany(mappedBy = "summarize", fetch = FetchType.EAGER)
-	private List<Manual> manual;
+	@ManyToOne
+	@JoinColumn(name = "manual_id")
+	private Manual manual;
 	
 	@Column(name = "created_at", insertable = false, updatable = false)
     private Timestamp createdAt;
